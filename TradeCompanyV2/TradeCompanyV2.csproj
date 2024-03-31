@@ -67,6 +67,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DB\TradeCompanyDB.mdf" />
+    <Content Include="DB\TradeCompanyDB_log.ldf">
+      <DependentUpon>TradeCompanyDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -87,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DB\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
