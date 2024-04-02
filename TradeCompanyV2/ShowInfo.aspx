@@ -26,9 +26,16 @@
                     <asp:BoundField DataField="CustomerId" HeaderText="Номер заказчика" SortExpression="CustomerId" />
                     <asp:BoundField DataField="Price" HeaderText="Цена" SortExpression="Price" />
                     <asp:BoundField DataField="Quantity" HeaderText="Кол-во" SortExpression="Quantity" />
+                    <asp:DynamicField DataField="CustomerId" HeaderText="CustomerId" ReadOnly="True" />
                 </Columns>
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TradeCompanyDBConnectionString %>" InsertCommand="INSERT INTO Orders(Title, CustomerId, Price, Quantity) VALUES (@Title, @CustomerId, @Price, @Quantity)" SelectCommand="SELECT * FROM [Orders] WHERE ([CustomerId] = @CustomerId)">
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TradeCompanyDBConnectionString %>" InsertCommand="INSERT INTO Orders(Title, CustomerId, Price, Quantity) VALUES (@Title, @CustomerId, @Price, @Quantity)" SelectCommand="SELECT * FROM [Orders] WHERE ([CustomerId] = @CustomerId)" UpdateCommand="UPDATE Orders 
+SET 
+Title = @Title, 
+Price = @Price, 
+CustomerId = @CustomerId,
+Quantity = @Quantity 
+WHERE (Id = @Id)">
                 <InsertParameters>
                     <asp:ControlParameter ControlID="ProductName" Name="Title" PropertyName="Text" />
                     <asp:ControlParameter ControlID="GridView1" Name="CustomerId" PropertyName="SelectedValue" />
@@ -38,8 +45,16 @@
                 <SelectParameters>
                     <asp:ControlParameter ControlID="GridView1" Name="CustomerId" PropertyName="SelectedValue" Type="Int32" />
                 </SelectParameters>
+                <UpdateParameters>
+                    <asp:ControlParameter ControlID="GridView2" Name="Title" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="GridView2" Name="Price" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="GridView2" Name="Quantity" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="GridView2" Name="Id" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="GridView1" Name="CustomerId" PropertyName="SelectedValue" />
+                </UpdateParameters>
             </asp:SqlDataSource>
-            <asp:Button ID="ButtonAddOrder" runat="server" Text="Добавить заказ" OnClick="ButtonAddOrder_Click" />
+            <asp:Button ID="ButtonOrderAdd" runat="server" Text="Добавить заказ" OnClick="ButtonOrderAdd_Click"  />
+            <asp:Button ID="ButtonOrderEdit" runat="server" Text="Редактировать заказы" OnClick="ButtonOrderEdit_Click" />
             <br />
             <asp:Panel ID="PanelNewOrder" runat="server" Visible="False">
                 Название товара
@@ -52,7 +67,7 @@
                 <asp:TextBox ID="ProductCount" runat="server"></asp:TextBox>
                 <br />
                 <asp:Button ID="ButtonSaveOrder" runat="server" Text="Добавить" OnClick="ButtonSaveOrder_Click" />
-                <asp:Button ID="ButtonCamcelOrder" runat="server" Text="Отменить" OnClick="ButtonCamcelOrder_Click" />
+                <asp:Button ID="ButtonCancelOrder" runat="server" Text="Отменить" OnClick="ButtonCancelOrder_Click" />
             </asp:Panel>
         </div>
     </form>

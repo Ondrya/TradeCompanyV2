@@ -15,12 +15,21 @@ namespace TradeCompanyV2
         }
 
 
-
-        protected void ButtonAddOrder_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Добавить новый заказ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ButtonOrderAdd_Click(object sender, EventArgs e)
         {
             PanelNewOrder.Visible = true;
         }
 
+        /// <summary>
+        /// Сохранить заказ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void ButtonSaveOrder_Click(object sender, EventArgs e)
         {
             SqlDataSource2.Insert();
@@ -29,12 +38,17 @@ namespace TradeCompanyV2
             HideNewOrderPanel();
         }
 
-        
-        protected void ButtonCamcelOrder_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Отменить добавление заказа
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ButtonCancelOrder_Click(object sender, EventArgs e)
         {
             ClearNewOrder();
             HideNewOrderPanel();
         }
+
 
         /// <summary>
         /// Скрыть панель нового заказа
@@ -52,6 +66,25 @@ namespace TradeCompanyV2
             ProductName.Text = string.Empty;
             ProductPrice.Text = string.Empty;
             ProductCount.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Редактировать заказы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void ButtonOrderEdit_Click(object sender, EventArgs e)
+        {
+            if (GridView2.AutoGenerateEditButton == true)
+            {
+                GridView2.AutoGenerateEditButton = false;
+                ButtonOrderEdit.Text = "Редактировать заказы";
+            }
+            else
+            {
+                GridView2.AutoGenerateEditButton = true;
+                ButtonOrderEdit.Text = "Закончить редактирование";
+            }
         }
     }
 }
