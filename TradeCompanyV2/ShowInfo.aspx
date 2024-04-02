@@ -23,10 +23,9 @@
                 <Columns>
                     <asp:BoundField DataField="Id" HeaderText="Номер" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
                     <asp:BoundField DataField="Title" HeaderText="Название товара" SortExpression="Title" />
-                    <asp:BoundField DataField="CustomerId" HeaderText="Номер заказчика" SortExpression="CustomerId" />
+                    <asp:BoundField DataField="CustomerId" HeaderText="Номер заказчика" SortExpression="CustomerId" ReadOnly="True" />
                     <asp:BoundField DataField="Price" HeaderText="Цена" SortExpression="Price" />
                     <asp:BoundField DataField="Quantity" HeaderText="Кол-во" SortExpression="Quantity" />
-                    <asp:DynamicField DataField="CustomerId" HeaderText="CustomerId" ReadOnly="True" />
                 </Columns>
             </asp:GridView>
             <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:TradeCompanyDBConnectionString %>" InsertCommand="INSERT INTO Orders(Title, CustomerId, Price, Quantity) VALUES (@Title, @CustomerId, @Price, @Quantity)" SelectCommand="SELECT * FROM [Orders] WHERE ([CustomerId] = @CustomerId)" UpdateCommand="UPDATE Orders 
